@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import {
+  responsiveFontSizes,
+  MuiThemeProvider,
+} from "@material-ui/core";
+import { createTheme } from "@material-ui/core/styles";
+import ArticleDetailsScreen from "./screens/ArticleDetailsScreen";
+import { NAVIGATION_PATHNAMES } from "./constants";
 
-function App() {
+const App = () => {
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <MuiThemeProvider theme={theme}>
+        <Routes>
+          <Route path={NAVIGATION_PATHNAMES.HOMESCREEN} exact element={<HomeScreen/>} />
+          <Route path={NAVIGATION_PATHNAMES.LOGINSCREEN} element={<LoginScreen/>} />
+          <Route path={NAVIGATION_PATHNAMES.REGISTERSCREEN} element={<RegisterScreen/>} />
+          <Route path={NAVIGATION_PATHNAMES.ARTICLEDETAILSSCREEN} element={<ArticleDetailsScreen/>} />
+        </Routes>
+      </MuiThemeProvider>
+    </Router>
   );
-}
+};
 
 export default App;
